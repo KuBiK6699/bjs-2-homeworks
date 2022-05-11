@@ -1,10 +1,9 @@
 'use strict'
 
 function solveEquation(a, b, c) {
-  let arr = [];
   let d = b**2-4*a*c;
   if (d < 0) { 
-    return (arr);
+    return ([]);
   } else if (d === 0) {
     return ([(-b/(2*a))]);
   } else if (d > 0) {
@@ -24,7 +23,7 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
   } else if (isNaN(contribution)) {
     return totalAmount = `Параметр "Начальный взнос" содержит неправильное значение "${contribution}"`;
   } else if (isNaN(amount)) {
-    return totalAmount = `Параметр "Сумма кредита" содержит неправильное значение "${amount}"`;
+    return totalAmount = `Параметр "Общая стоимость" содержит неправильное значение "${amount}"`;
   }
 
   let returnSumm = entryAmount - entryContribution;
@@ -34,7 +33,5 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
 
   let everyMonthPay = returnSumm * ((entryPercent / 12) + ((entryPercent / 12) / (((1 + (entryPercent / 12)) ** timeCreditDate) - 1)));
 
-  totalAmount = (timeCreditDate * everyMonthPay).toFixed(2);
-
-  return totalAmount;
+  return +(timeCreditDate * everyMonthPay).toFixed(2);
 }
