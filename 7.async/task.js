@@ -7,9 +7,7 @@ class AlarmClock {
         if (id === undefined) {
             throw new Error('error text');
         }
-        if (this.alarmCollection.some(el => 
-             el.id === id
-        )) {
+        if (this.alarmCollection.some(el => el.id === id)) {
             return;
         }
         this.alarmCollection.push({
@@ -31,16 +29,12 @@ class AlarmClock {
         return time;
     }
     start() {
-        let forTime = this;
-        function checkClock(alarm) {
-            if (alarm.time === forTime.getCurrentFormattedTime()) {
-                alarm.callBack();
-            }
-        }
         if (this.timerId === null) {
             this.timerId = setInterval(() => {
-                this.alarmCollection.forEach(el => checkClock(el));
-            }, 1000);
+                this.alarmCollection.forEach((x) => {
+                    this.checkClock(x);                    
+                })
+            }, 100);
         }
     }
     stop() {
@@ -50,10 +44,11 @@ class AlarmClock {
         }
     }
     printAlarms() {
-        this.alarmCollection.forEach(el => console.log(`Будильник ${el.id} прозвонит в ${el.time}.`));
+        this.alarmCollection.forEach(el => console.error(`Будильник ${el.id} прозвонит в ${el.time}.`));
     }
     clearAlarms() {
-        stop();
-        this.alarmCollection = [];
+        this.alarmCollection.splice(0, this.alarmCollection.length);
+        console.log('все удалены: ');
+        console.table(this.alarmCollection);
     }
 }
